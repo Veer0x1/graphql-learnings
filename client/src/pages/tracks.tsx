@@ -5,7 +5,7 @@ import TrackCard from "../containers/track-card";
 import QueryResult from "../components/query-result";
 const TRACKS = gql`
   query GetHomeTrack {
-    trackForHome {
+    tracksForHome {
       author {
         name
         id
@@ -26,11 +26,12 @@ const TRACKS = gql`
  */
 const Tracks = () => {
   const { loading, error, data } = useQuery(TRACKS);
-
+  console.log(data);
+  
   return (
     <Layout grid>
       <QueryResult error={error} loading={loading} data={data}>
-        {data?.trackForHome?.map((track: any) => {
+        {data?.tracksForHome?.map((track: any) => {
           return <TrackCard key={track.id} track={track} />;
         })}{" "}
       </QueryResult>

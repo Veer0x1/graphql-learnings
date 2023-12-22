@@ -15,26 +15,36 @@ type Track{
     length:Int
     "The number of modules this track contains"
     moduleCount:Int
-
+    "The track's complete description, can be in Markdown format"
+    description: String
+    "The number of times a track has been viewed"
+    numberOfViews: Int
+    "The track's complete array of Modules"
+    modules: [Module!]!
 }
 
-type Albums{
-    id:ID!
-    title:String!
-    thumbnail:String
-    length:Int
-    moduleCount:Int
+"A Module is a single unit of teaching. Multiple Modules compose a Track"
+type Module {
+  id: ID!
+  "The Module's title"
+  title: String!
+  "The Module's length in minutes"
+  length: Int
 }
 
 "Author of a complete Track or a Module"
 type Author {
   id: ID!
+    "Author's first and last name"
   name: String!
+    "Author's profile picture url"
   photo: String
 }
 
 type Query{
     "Get tracks array for homepage grid"
-    trackForHome: [Track!]!
+    tracksForHome: [Track!]!
+    "Fetch a specific track, provided a track's ID"
+    track(id: ID!): Track
 }
 `;
